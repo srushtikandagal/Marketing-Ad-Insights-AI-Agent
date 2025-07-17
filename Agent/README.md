@@ -1,54 +1,56 @@
-# Marketing Ad Insights Agent
+# Marketing Ad Insights AI Agent
 
 ## Overview
-This project is a lightweight AI agent that reviews Meta/Google ad performance CSVs and outputs insights and creative improvement suggestions. It is served using a FastAPI backend and features a modern Streamlit UI.
+This project is a lightweight AI agent that reviews Meta/Google ad performance CSVs and outputs actionable insights and creative improvement suggestions. It is built with a FastAPI backend, a modern Streamlit UI, and leverages local LLMs (Vicuna via Ollama), RAG (ChromaDB), and a knowledge graph for context-aware recommendations.
 
-## User Experience
+---
 
-The app provides a clean, intuitive interface for marketers and analysts:
+## Architecture
+- **FastAPI**: Backend API for file upload, data processing, and agent orchestration.
+- **Streamlit**: User interface for uploading CSVs, viewing insights, submitting feedback, and running automated evaluation.
+- **Pandas**: For CSV parsing and summarization of ad metrics.
+- **Vicuna LLM (via Ollama)**: Local large language model for generating insights and suggestions.
+- **LangChain**: For prompt management and LLM orchestration.
+- **ChromaDB**: Vector database for Retrieval Augmented Generation (RAG), grounding insights in historical data.
+- **Knowledge Graph**: Python dictionary mapping ad platforms and creative types to best practices.
+- **Automated Evaluation**: Script for F1 and ROUGE scoring of agent outputs.
 
-- **Upload your ad performance CSV** using a drag-and-drop or file browser.
-- **Preview your uploaded data** instantly in a table, so you can verify your file before analysis.
-- **Automated insights generation**: The system processes your file and generates actionable insights and creative suggestions using a local LLM (Vicuna via Ollama).
-- **Visual feedback**: Progress and success messages keep you informed at every step.
-- **Modern, user-friendly design**: The interface is clean, responsive, and easy to use, as shown below:
+---
 
-### 1. Upload & Preview Workflow
-![Upload and Preview Screenshot](insights_upload.png)
-*Users upload their CSV and instantly preview the data before analysis.*
+## User Experience & Workflow
 
-### 2. Insights & Feedback Workflow
-![Insights and Feedback Screenshot](insights_feedback.png)
-*View actionable insights, download results, and provide feedback directly in the app.*
+1. **Upload your ad performance CSV** using the drag-and-drop or file browser.
+2. **Preview your uploaded data** instantly in a table.
+3. **Automated insights generation**: The system processes your file and generates actionable insights and creative suggestions.
+4. **Visual feedback**: Progress and success messages keep you informed at every step.
+5. **Automated Evaluation**: Upload a CSV of agent outputs and references to benchmark your agent’s performance with F1 and ROUGE scores.
 
-### 3. Automated Evaluation Workflow
-![Automated Evaluation Screenshot](automated_evaluation.png)
-*Benchmark your agent’s performance with F1 and ROUGE scores using the built-in evaluation tool.*
+### Main Interface Screenshot
+![Main Interface](main_interface.png)
+*Upload your CSV and access automated evaluation in one place.*
 
-## How It Works
+---
+
+## How to Run
 
 1. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
-
 2. **Start the Vicuna model with Ollama:**
    ```bash
    ollama run vicuna
    ```
-
 3. **Run the FastAPI server:**
    ```bash
    uvicorn main:app --reload
    ```
-
 4. **Run the Streamlit app:**
    ```bash
    streamlit run streamlit_app.py
    ```
 
-5. **Test the `/run-agent` endpoint:**
-   - Use the Streamlit UI or a tool like Postman/curl to POST a CSV file to `http://localhost:8000/run-agent`.
+---
 
 ## Features
 - FastAPI backend for robust, asynchronous processing
@@ -58,11 +60,32 @@ The app provides a clean, intuitive interface for marketers and analysts:
 - Knowledge graph for context-aware best practices
 - Automated evaluation (F1, ROUGE) and feedback loop
 
-## Next Steps
-- Integrate more advanced knowledge graphs
-- Add multi-modal data support
-- Expand to support more ad platforms and data formats
+---
+
+## Evaluation Strategy
+- **User feedback loop**: Users rate insights and leave comments; feedback is logged for continuous improvement.
+- **Automated metrics**: F1 and ROUGE scores are computed by comparing agent outputs to reference answers.
+- **Manual and automated testing**: Both user feedback and objective metrics are used to evaluate performance.
 
 ---
 
-*Built with ❤️ by your AI Marketing Assistant. Powered by FastAPI, Streamlit, and Vicuna LLM.* 
+## Pattern Recognition & Improvement Loop
+- **Feedback-driven refinement**: User feedback is logged and can be used to refine prompts and improve the agent.
+- **Memory module**: ChromaDB stores past insights for retrieval and grounding.
+- **Prompt refinement**: Prompts can be updated based on feedback and observed errors.
+
+---
+
+## Potential Improvements
+- Integrate advanced knowledge graphs (e.g., Neo4j)
+- Add multi-modal data support (images, videos)
+- Expand to more ad platforms and data formats
+- Containerize for cloud deployment and multi-user access
+
+---
+
+*Built with ❤️ by your AI Marketing Assistant. Powered by FastAPI, Streamlit, and Vicuna LLM.*
+
+---
+
+**Make sure your image (`main_interface.png`) is in your project directory for the screenshot to display.** 
