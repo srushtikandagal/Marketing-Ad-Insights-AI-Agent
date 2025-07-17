@@ -1,0 +1,37 @@
+Technical Write-up: AI Agent for Marketing Ad Insights
+
+Architecture and Tools Used
+--------------------------
+This project delivers a lightweight, extensible AI agent that analyzes marketing ad performance data and generates actionable insights and creative suggestions. The solution is built with a modern, modular architecture:
+
+- FastAPI serves as the backend, providing a robust, asynchronous API for file uploads and agent interaction.
+- Streamlit powers the user interface, enabling marketers to easily upload CSVs, view insights, and provide feedback in a clean, interactive environment.
+- Pandas is used for efficient CSV parsing and summarization of key ad metrics (CTR, CPC, Impressions, etc.).
+- Vicuna LLM (via Ollama) is the local large language model, ensuring data privacy and cost efficiency. The LLM is orchestrated through LangChain, which streamlines prompt management and model interaction.
+- ChromaDB is integrated as a vector database for Retrieval Augmented Generation (RAG). Each campaign’s summary and insights are embedded and stored, allowing the agent to retrieve and ground new responses in historical data.
+- Knowledge Graph is implemented as a Python dictionary mapping ad platforms and creative types to best practices. This structured domain knowledge is dynamically included in the LLM prompt to make suggestions more context-aware.
+- Automated Evaluation is supported via a script that computes F1 and ROUGE scores for agent outputs compared to reference answers, using scikit-learn and rouge-score.
+
+Challenges Faced and Solutions
+-----------------------------
+Local LLM Integration:
+Running a performant LLM locally (Vicuna via Ollama) required careful orchestration to ensure compatibility with LangChain and the FastAPI backend. This was solved by leveraging LangChain’s Ollama integration, which abstracts away API differences and allows seamless prompt passing.
+
+Retrieval Augmented Generation (RAG):
+Storing and retrieving relevant past insights in a way that meaningfully grounds the LLM’s output was a challenge. ChromaDB was chosen for its ease of use and local deployment. Summaries are embedded and stored, and cosine similarity is used to retrieve the most relevant past insights for inclusion in the prompt.
+
+Knowledge Graph Contextualization:
+Mapping ad platforms and creative types to best practices required a flexible yet structured approach. A Python dictionary was used for rapid prototyping, allowing the agent to dynamically include best practice tips in the LLM prompt based on the uploaded data.
+
+Evaluation and Feedback:
+Capturing both quantitative and qualitative feedback was essential for continuous improvement. A feedback loop was implemented in the Streamlit UI, logging user ratings and comments to a CSV file. Automated evaluation scripts were added to compute F1 and ROUGE scores, providing objective performance metrics.
+
+Potential Improvements and Next Steps
+-------------------------------------
+- Advanced Knowledge Graph: Integrate a more sophisticated knowledge graph (e.g., Neo4j or RDF-based) to enable multi-hop reasoning and richer domain relationships.
+- Automated Prompt Refinement: Use logged feedback to automatically refine prompts or fine-tune the LLM, further reducing hallucinations and improving relevance.
+- Multi-modal Data Support: Extend the agent to handle images, videos, or other ad formats for a more comprehensive analysis.
+- Multi-step Agents: Implement agents that can search marketing blogs (RAG over external documents) or rewrite ad text in various tones and for different platforms.
+- Deployment and Scalability: Containerize the solution for cloud deployment and add authentication for secure, multi-user access.
+
+This project demonstrates a robust, production-ready foundation for AI-driven marketing analytics, with clear paths for future enhancement and scalability. All core requirements—RAG, knowledge graph, evaluation, and improvement loop—are implemented or easily extendable, making this agent a valuable tool for marketers and researchers alike. 

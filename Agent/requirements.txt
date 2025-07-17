@@ -1,0 +1,10 @@
+fastapi
+pandas
+uvicorn 
+langchain
+openai 
+ollama 
+streamlit 
+chromadb 
+rouge-score
+scikit-learn 
