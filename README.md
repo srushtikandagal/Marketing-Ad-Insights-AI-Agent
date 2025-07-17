@@ -14,11 +14,12 @@ The app provides a clean, intuitive interface for marketers and analysts:
 - **Modern, user-friendly design**: The interface is clean, responsive, and easy to use, as shown below:
 
 ### 1. Upload & Preview Workflow
-![Upload and Preview Screenshot](insights_upload.png)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/af962a27-3c21-4965-a6b6-3cf47ce95a05" />
+
 *Users upload their CSV and instantly preview the data before analysis.*
 
 ### 2. Insights & Feedback Workflow
-![Insights and Feedback Screenshot](insights_feedback.png)
+
 *View actionable insights, download results, and provide feedback directly in the app.*
 
 ### 3. Automated Evaluation Workflow
